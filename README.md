@@ -1,6 +1,6 @@
 ## basic task tracker demo
 
-### to install
+### install
 
 - create DB and user 
 - cp .env.example .env
@@ -13,7 +13,8 @@
 - register new account
 
 
-### tests
+### test
 
-for some reason testing wipes the data base so you can will have ro reseed after running each test, unsure why this is i suspect something is configured wrong
+For some reason testing wipes the data base so you can will have ro reseed after running each test, I unsure why this is i suspect something is configured wrong
 
+- php artisan test
