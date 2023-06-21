@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
     Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/task/edit/{id}', [TaskController::class, 'edit'])->name('task.edit');
+    Route::post('/task/update', [TaskController::class, 'update'])->name('task.update');
     
     Route::get('/categories/', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');

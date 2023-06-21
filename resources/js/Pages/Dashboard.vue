@@ -101,6 +101,7 @@
                 user: {{task.user.name}}<br />
                 category: {{task.category.name}}<br />
                 project: {{task.project.name}}<br />
+                <a :href="route('task.edit',task.id)" class="text-blue-400 p-1">Edit</a>
             </div>
         </div>
 

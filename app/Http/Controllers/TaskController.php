@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\DeleteTaskRequest;
 use App\Models\Task;
 use App\Models\Category;
 use App\Models\Project;
@@ -70,9 +71,13 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(Task $task, Int $id)
     {
-        //
+        Inertia::share('categories', Category::all(['id','name']) );
+        Inertia::share('projects', Project::all(['id','name']) );
+        Inertia::share('statuses', Status::all(['id','name']) );
+        Inertia::share('data', Task::find($id) );
+        return Inertia::render('Task/edit');
     }
 
     /**
@@ -80,14 +85,32 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $request->validate([
+            'id' => 'required|integer',
+            'name' => 'required|string|min:3|max:50',
+            'description' => 'required|string|min:3|max:255',
+            'status' => 'required|integer',//something better could be done for production
+            'project' => 'required|integer',
+            'category' => 'required|integer',
+        ]);
+
+
+        Task::where('id', $request->id)
+        ->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'status_id' => $request->status,
+            'category_id' => $request->category,
+            'project_id' => $request->project,
+            'user_id' => Auth::user()->id,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task,Int $id)
     {
-        //
+        Task::find($id)->delete();
     }
 }

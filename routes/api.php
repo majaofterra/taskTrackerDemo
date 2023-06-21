@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/project', [DashboardController::class, 'project'])->name('project');
     Route::put('/filter', [DashboardController::class, 'filter'])->name('filter');
     Route::put('/search', [DashboardController::class, 'search'])->name('search');
+
+    Route::delete('/task/destroy/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 });

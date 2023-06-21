@@ -14,7 +14,7 @@ defineEmits(['update:options']);
 
 <template>
     <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" @input="$emit('update:modelValue', $event.target.value)">
-        <option value="" disabled selected>Select option</option>
-        <option v-for="item in options" :value="item.id">{{item.name}}</option>
+        <option value="" disabled >Select option</option>
+        <option v-for="item in options" :value="item.id" >{{item.name}}</option>
     </select>
 </template>

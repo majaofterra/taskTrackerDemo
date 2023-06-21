@@ -24,7 +24,6 @@
 	methods: {
         submit : function(){
 			this.form.post(route('task.store'), {
-				// onFinish: () => this.form.reset('name'),
 			});
 		},	
 	},
