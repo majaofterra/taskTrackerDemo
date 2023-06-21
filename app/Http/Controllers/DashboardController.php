@@ -43,11 +43,17 @@ class DashboardController extends Controller
         $project = project::where('id','=', $request->project)->first();
         $done = Task::where('project_id','=', $request->project)->where('status_id','=', 1)->count();
         $total = Task::where('project_id','=', $request->project)->where('status_id','!=', 1)->count();
+
+        if($total > 0)
+            $complete = ($done/$total)*100;
+        else
+            $complete = 0.00;
+
         return  (object)[
             'project' => [
                 'name'  => $project->name,
                 'started'  => $project->created_at,
-                'compelte'  => number_format( ($done/$total)*100,2),
+                'compelte'  => number_format($complete,2),
             ],
             'tasks' => Task::where('project_id','=', $request->project)->with('user','category','project','status')->get(),
         ];
